@@ -1,0 +1,910 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    list-style: none;
+    text-decoration: none;
+}
+
+:root {
+    --amarelo: #F0B90B;
+    --escuro: #101016;
+    --branco: #ffffff;
+    --gradiente: radial-gradient(circle, #0B1C60, #081447, #050D2D);
+    --dark: #0a0a0a;
+}
+
+/* Ajuste para seções */
+section {
+    padding: 60px 20px;
+    background: var(--escuro);
+}
+
+.secao-sobre, .secao-servicos, .secao-contato {
+    text-align: center;
+}
+
+h2 {
+    color: var(--amarelo);
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+p {
+    color: var(--branco);
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto 40px;
+}
+
+body {
+    color: var(--branco);
+    background: var(--escuro);
+}
+
+.navegacao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 40px;
+    width: 100%;
+    background: radial-gradient(circle, #0B1C60, #081447, #050D2D);
+    transition: all 0.5s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+
+.navegacao .logo {
+    color: var(--amarelo);
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+.logo span {
+    color: var(--branco);
+}
+
+.navegacao ul {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 5rem;
+}
+
+.navegacao ul li a {
+    color: var(--branco);
+    font-size: 17px;
+    font-weight: 500;
+    transition: all 0.5s;
+    text-decoration: none;
+}
+
+.navegacao ul li a:hover {
+    color: var(--amarelo);
+}
+
+.navegacao i {
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.menu {
+    cursor: pointer;
+    display: none;
+}
+
+.menu .barra {
+    display: block;
+    width: 28px;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--branco);
+    margin: 5px auto;
+    transition: all 0.3s;
+}
+
+.menu .barra:nth-child(1),
+.menu .barra:nth-child(3) {
+    background: var(--amarelo);
+}
+
+/* Estilos para o modal */
+.modal {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    z-index: 1500;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo escuro semi-transparente */
+}
+
+.modal-content {
+    background: radial-gradient(circle, #0B1C60, #081447, #050D2D);
+    margin: 15% auto;
+    padding: 20px 50px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 600px;
+    text-align: justify;
+    color: rgb(0, 0, 0); /* Cor do texto no modal */
+}
+
+.botao-modal {
+    background-color: #095e07;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.botao-modal:hover {
+    background-color: #081447;
+}
+
+
+
+.inicio {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-image: 
+        radial-gradient(circle, rgba(11, 28, 96, 0.9), rgba(1, 2, 8, 1)), 
+        url('/static/img/backgraud-image-\ cripto.jpg'); 
+
+    background-size: cover;
+    background-position: center;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: 1;
+}
+
+.texto-inicio {
+    position: relative;
+    z-index: 2;
+    color: var(--branco); 
+}
+
+
+
+.texto-inicio .texto-h4 {
+    font-size: 2rem;
+    color: var(--amarelo);
+    margin-bottom: 1.5rem;
+}
+
+.texto-inicio .texto-h1 {
+    font-size: 5rem;
+    margin-bottom: 2.5rem;
+    line-height: 4rem;
+}
+
+.texto-inicio p {
+    font-size: 20px;
+    margin-bottom: 4.5rem;
+}
+
+.botao-inicio {
+    padding: 15px 45px;
+    background: var(--amarelo);
+    color: var(--escuro);
+    border-radius: 10px;
+    font-weight: 700;
+    transition: all 0.5s;
+    text-decoration: none;
+}
+
+.botao-inicio:hover {
+    background: #a57900;
+}
+
+.imagem-inicio img {
+    width: 100%;
+    padding-left: 10rem;
+    position: relative;
+    z-index: 2;
+}
+
+@media (max-width: 785px) {
+    .navegacao {
+        padding: 18px 20px;
+    }
+
+    .menu {
+        display: block;
+    }
+
+    .menu.ativo .barra:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu.ativo .barra:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu.ativo .barra:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .menu-principal {
+        position: fixed;
+        right: -100%;
+        top: 70px;
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        background: var(--escuro);
+        gap: -10px;
+        transition: 0.3s;
+    }
+
+    .menu-principal.ativo {
+        right: 0;
+    }
+
+    .item-menu {
+        margin: 16px 0;
+    }
+
+    .inicio {
+        padding: 100px 2%;
+        flex-direction: column;
+        text-align: center;
+        overflow: hidden;
+        gap: 5rem;
+    }
+
+    .inicio .texto-h4 {
+        font-size: 15px;
+    }
+
+    .inicio .texto-h1 {
+        font-size: 2.5rem;
+        line-height: 3rem;
+    }
+
+    .inicio p {
+        font-size: 3em;
+        margin-bottom: 2rem;
+    }
+}
+
+/*-------------------tela de login---------------------*/
+
+.navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 40px;
+
+    width: 100%;
+    background: radial-gradient(circle, #0B1C60, #081447, #050D2D);
+    transition: all 0.5s;
+    position: fixed;
+}
+
+.navigation a{
+    text-decoration: none;
+    color: white;
+}
+
+
+.navigation #logo {
+    color: var(--amarelo);
+    font-size: 1.7rem;
+    font-weight: 600;
+    
+}
+
+.navigation #logo h2 {
+    color: var(--branco);
+    
+}
+
+.navigation ul {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    gap: 5rem;
+}
+
+.navigation ul li{
+    color: var(--branco);
+    font-size: 17px;
+    font-weight: 500;
+    transition: all 0.5s;
+    text-decoration: none;
+}
+
+
+
+.navigation i {
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+input {
+    font-family: "Poppins", sans-serif;
+  }
+  
+  main {
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    background-image: 
+    radial-gradient(circle, rgba(11, 28, 96, 0.9), rgba(1, 2, 8, 1)), 
+    url('/static/img/fundo.png');
+    background-size: cover; /* Ajusta a imagem para cobrir todo o contêiner */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat; /* Impede a repetição da imagem */
+
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .box {
+    position: relative;
+    width: 100%;
+    max-width: 1020px;
+    height: 640px;
+    background-color: var(--escuro);
+    border-radius: 3.3rem;
+    box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
+  }
+  
+  .inner-box {
+    position: absolute;
+    width: calc(100% - 4.1rem);
+    height: calc(100% - 4.1rem);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .forms-wrap {
+    position: absolute;
+    height: 100%;
+    width: 45%;
+    top: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    transition: 0.8s ease-in-out;
+  }
+  
+  form {
+    max-width: 260px;
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    transition: opacity 0.02s 0.4s;
+  }
+  
+  form.sign-up-form {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    width: 60px;
+    margin-right: 0.3rem;
+  }
+  
+  .logo h4 {
+    font-size: 1.1rem;
+    margin-top: 10px;
+    letter-spacing: -0.5px;
+    color: #fff;
+  }
+  
+  .heading h2 {
+    font-size: 2.1rem;
+    font-weight: 600;
+    color: #fff;
+  }
+  
+  .heading h6 {
+    color: #fff;
+    font-weight: 400;
+    font-size: 0.75rem;
+    display: inline;
+  }
+  
+  .toggle {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: 0.3s;
+  }
+  
+  .toggle:hover {
+    color: var(--amarelo);
+  }
+  
+  .input-wrap {
+    position: relative;
+    height: 37px;
+    margin-bottom: 2rem;
+  }
+  
+  .input-field {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #bbb;
+    padding: 0;
+    font-size: 0.95rem;
+    color: #fff;
+    transition: 0.4s;
+  }
+  
+  label {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.95rem;
+    color: #bbb;
+    pointer-events: none;
+    transition: 0.4s;
+  }
+  
+  .input-field.active {
+    border-bottom-color: #151111;
+  }
+  
+  .input-field.active + label {
+    font-size: 0.75rem;
+    top: -2px;
+  }
+  
+  .sign-btn {
+    display: inline-block;
+    width: 100%;
+    height: 43px;
+    background-color: var(--amarelo);
+    color: var(--branco);
+    border: none;
+    cursor: pointer;
+    border-radius: 0.8rem;
+    font-size: 0.8rem;
+    margin-bottom: 2rem;
+    transition: 0.3s;
+  }
+  
+  .sign-btn:hover {
+    background-color: #e9c95f;
+  }
+  
+  .text {
+    color: #bbb;
+    font-size: 0.7rem;
+  }
+  
+  .text a {
+    color: #bbb;
+    transition: 0.3s;
+  }
+  
+  .text a:hover {
+    color: var(--amarelo);
+  }
+  
+  main.sign-up-mode form.sign-in-form {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  main.sign-up-mode form.sign-up-form {
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  main.sign-up-mode .forms-wrap {
+    left: 55%;
+  }
+  
+  main.sign-up-mode .carousel {
+    left: 0%;
+  }
+  
+  .carousel {
+    position: absolute;
+    height: 100%;
+    width: 55%;
+    left: 45%;
+    top: 0;
+    background-color: #ffde4b;
+    border-radius: 2rem;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding-bottom: 2rem;
+    overflow: hidden;
+    transition: 0.8s ease-in-out;
+  }
+  
+  .images-wrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+  
+  .image {
+    width: 100%;
+    grid-column: 1/2;
+    grid-row: 1/2;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.5s;
+  }
+  
+  .img-1 {
+    transform: translate(0, -50px);
+  }
+  
+  .img-2 {
+    transform: scale(0.4, 0.5);
+  }
+  
+  .img-3 {
+    transform: scale(0.3) rotate(-20deg);
+  }
+  
+  .image.show {
+    opacity: 1;
+    transform: none;
+  }
+  
+  .text-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  
+  .text-wrap {
+    max-height: 2.2rem;
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+  }
+  
+  .text-group {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    transform: translateY(0);
+    transition: 0.5s;
+  }
+  
+  .text-group h2 {
+    color: #151111;
+    line-height: 2.2rem;
+    font-weight: 600;
+    font-size: 1.6rem;
+  }
+  
+  .bullets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .bullets span {
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: #aaa;
+    margin: 0 0.25rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .bullets span.active {
+    width: 1.1rem;
+    background-color: #151111;
+    border-radius: 1rem;
+  }
+
+/* Animação de entrada para os elementos da seção */
+@keyframes entrar {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    10% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    50% {
+        opacity: 1; /* Mantém os elementos visíveis por um tempo */
+    }
+    100% {
+        opacity: 1; /* Mantém os elementos visíveis até o final */
+    }
+}
+
+/* Aplicando animação aos elementos da seção de início */
+.texto-inicio h4,
+.texto-inicio h1,
+.texto-inicio p {
+    animation: entrar 8s ease-in-out forwards; /* Duração total de 8 segundos, sem repetição */
+    opacity: 0; /* Começa invisível */
+}
+
+/* Ajustando o atraso para que todos apareçam na ordem correta */
+.texto-inicio h4 {
+    animation-delay: 0s; /* Entra imediatamente */
+}
+
+.texto-inicio h1 {
+    animation-delay: 1s; /* Entra após 1 segundo */
+}
+
+.texto-inicio p {
+    animation-delay: 2s; /* Entra após 2 segundos */
+}
+
+
+
+
+.sobre {
+    width: 100%;
+    padding: 10rem 2%;
+    text-align: center;
+}
+
+.sobre .titulo-principal {
+    font-size: 3rem;
+    margin-bottom: 5rem;
+    color: var(--amarelo);
+}
+
+.container-sobre {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.feature {
+    width: 30%;
+    background: var(--escuro);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0.5rem 1rem rgba(200, 200, 200, 0.3);
+}
+
+.feature .titulo-feature {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--amarelo);
+}
+
+.feature p {
+    color: var(--branco);
+}
+
+
+
+.Criptomoedas {
+    width: 100%;
+    padding: 10rem 2%;
+    text-align: center;
+    background: radial-gradient(circle, #0B1C60, #081447, #050D2D);
+}
+
+.logo-cripto {
+    width: 50px;  /* Defina o tamanho desejado */
+    height: auto; /* Mantém a proporção da imagem */
+    margin-right: 10px; /* Espaço entre logo e texto */
+}
+
+.info-cripto {
+    display: flex;
+    flex-direction: row;  /* Itens dentro da info-cripto em linha */
+    align-items: center;
+    flex-grow: 1;  /* Faz com que os itens ocupem o espaço restante */
+    justify-content: space-between; /* Garante espaçamento entre os itens */
+}
+
+.Criptomoedas .titulo-principal {
+    font-size: 3rem;
+    margin-bottom: 5rem;
+    color: var(--amarelo);
+}
+
+.container-Criptomoedas {
+    display: flex;
+    flex-direction: column; /* Mantém a exibição das criptos em lista (verticalmente) */
+    gap: 15px;  /* Espaço entre cada cripto */
+    max-width: 80vw;  /* Limita a largura do contêiner */
+    margin: 0 auto; /* Centraliza a lista na página */
+}
+
+.item-Criptomoeda {
+    
+    display: flex;
+    align-items: center;  /* Alinha os elementos verticalmente no centro */
+    justify-content: space-between;  /* Distribui os itens horizontalmente */
+    padding: 6px 15px;
+    text-decoration: none;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background: radial-gradient(circle, rgba(11, 28, 96, 0.9), rgba(1, 2, 8, 1));
+    
+}
+
+.item-Criptomoeda p {
+    color: var(--branco);
+
+}
+
+.verde {
+    color: green;
+}
+
+.vermelho {
+    color: red;
+}
+
+.Feedbacks {
+    width: 100%;
+    padding: 10rem 2%;
+    text-align: center;
+}
+
+.Feedbacks .titulo-principal {
+    font-size: 3rem;
+    margin-bottom: 5rem;
+    color: var(--amarelo);
+}
+
+.feedback-form {
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+}
+
+.feedback-form button {
+    padding: 1rem;
+    background-color: var(--amarelo);
+    color: var(--branco);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.feedback h3{
+    text-decoration: #ffffff;
+}
+.container-Feedbacks {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.Feedback {
+    width: 30%;
+    background: radial-gradient(circle, #0B1C60, #081447, #050D2D);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+}
+
+.Feedback p {
+    color: var(--branco);
+    margin-top: 1rem;
+}
+
+
+.contato {
+    width: 100%;
+    padding: 10rem 2%;
+    text-align: center;
+}
+
+.contato .titulo-principal {
+    font-size: 3rem;
+    margin-bottom: 5rem;
+    color: var(--amarelo);
+}
+
+.formulario-contato {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--escuro);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+}
+
+.formulario-contato input,
+.formulario-contato textarea {
+    width: 100%;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 5px;
+    border: none;
+}
+
+.formulario-contato button {
+    padding: 1rem;
+    background: var(--amarelo);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.formulario-contato button:hover {
+    background: #d99e00;
+}
+
+.footer {
+    width: 100%;
+    padding: 2rem 0;
+    text-align: center;
+    background: var(--escuro);
+}
+
+.footer p {
+    color: var(--branco);
+}
+
+.footer a {
+    color: var(--amarelo);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #d99e00;
+}
