@@ -12,14 +12,15 @@
     <!-- Navegação -->
     <nav class="navegacao">
         <div class="logo">
-            <span>APMC</span>
+            <span><img src="../static/img/logo.png" alt="Imagem Início" width="40px">APMC</span>
         </div>
         <ul class="menu-principal">
-            <li><a href="">Início</a></li>
-            <li><a href="sobre">Sobre</a></li>
-            <li><a href="Criptomoedas">Criptomoedas</a></li>
-            <li><a href="Feedbacks">Feedbacks</a></li>
-            <li><a href="contato">Contato</a></li>  
+            <li><a href="#">Início</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#Criptomoedas">Criptomoedas</a></li>
+            <li><a href="#Feedbacks">Feedbacks</a></li>
+            <li><a href="#contato">Contato</a></li> 
+            
               
         </ul>
         <div class="menu" id="menu-toggle">
@@ -45,7 +46,7 @@
             <h4 class="texto-h4">Bem-vindo ao</h4>
             <h1 class="texto-h1">APMC</h1>
             <p>Seu aplicativo de previsão e monitoramento de criptomoedas.</p>
-            <a href="login" class="botao-inicio">Comece já</a>
+            <a href="#Criptomoedas" class="botao-inicio">Comece já</a>
         </div>
         <div class="imagem-inicio">
             <img src="../static/img/logoAPMC.png" alt="Imagem Início">
@@ -93,48 +94,59 @@
                 <img src="{{ logos_criptomoedas[sigla] }}" alt="{{ sigla }}" class="logo-cripto">
                 <div class="info-cripto">
                     <h3>{{ sigla }}</h3>
-                    <p>Preço Atual: $ {{ info.preco | round(2) }}</p>
-                    <p>Volume de Mercado: $ {{ info.volume | default(0) }}</p>
+                    <p id="preco-{{ sigla }}">Preço Atual: $ {{ info.preco | round(2) }}</p>
+                    <p id="volume-{{ sigla }}">Volume de Mercado: $ {{ info.volume | default(0) }}</p>
                     <div class="mini-grafico">{{ info.grafico | safe }}</div>
-                    <p class="indice {% if info.percentual_variacao > 0 %}verde{% else %}vermelho{% endif %}">
+                    <p id="percentual-{{ sigla }}" class="indice {% if info.percentual_variacao > 0 %}verde{% else %}vermelho{% endif %}">
                         {{ info.percentual_variacao | round(2) }}%
                     </p>
                 </div>
+                
             </a>
             {% endfor %}
         </div>
     </section>
+
+    
     
     <!-- Seção Feedbacks -->
-<section id="Feedbacks" class="Feedbacks">
-    <h2 class="titulo-principal">O Que Dizem Nossos Usuários</h2>
+    <section id="Feedbacks" class="Feedbacks">
+        <h2 class="titulo-principal">O Que Dizem Nossos Usuários</h2>
 
-    <div class="container-Feedbacks" id="lista-feedbacks"></div>
+        <!-- Lista de Feedbacks -->
+        <div class="container-Feedbacks" id="lista-feedbacks"></div>
 
-    <!-- Formulário de Feedback -->
-    <div class="feedback-form">
-        <h3>Deixe seu Feedback</h3>
-        <input type="text" id="nome" placeholder="Seu nome" required />
-        <textarea id="mensagem" placeholder="Seu feedback" required></textarea>
-        <button id="enviar-feedback">Enviar Feedback</button>
-    </div>
+        <!-- Contêiner de Paginação -->
+        <div id="paginacao" class="paginacao"></div>
 
-</section>
-
-
-    <!-- Seção Contato -->
-    <section id="contato" class="contato">
-        <h2 class="titulo-principal">Entre em Contato</h2>
-        <form class="formulario-contato">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" name="nome" required>
-            <label for="email">E-mail:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="mensagem">Mensagem:</label>
-            <textarea id="mensagem" name="mensagem" required></textarea>
-            <button type="submit" class="botao-contato">Enviar</button>
-        </form>
+        <!-- Formulário de Feedback -->
+        <div class="feedback-form">
+            <h3>Deixe seu Feedback</h3>
+            <input type="text" id="nome" placeholder="Seu nome" required />
+            <textarea id="mensagem" placeholder="Seu feedback" required></textarea>
+            <button id="enviar-feedback">Enviar Feedback</button>
+        </div>
     </section>
+
+
+
+    <footer>
+        <div id="contato"class="footer-container">
+            <!-- Coluna Esquerda: Formulário "Fale Conosco" -->
+            
+            <!-- Coluna Direita: Informações de Contato e Copyright -->
+            <div class="footer-column-right">
+                <h3>Contato</h3>
+                <ul>
+                    <li>Email: <a href="mailto:Site.APMC@gmail.com">Site.APMC@gmail.com</a></li>
+                
+                </ul>
+                <p>&copy; 2024 APMC - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

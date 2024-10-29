@@ -10,17 +10,18 @@
 }
 
 :root {
-    --amarelo: #F0B90B;
+    --amarelo: #ffc508;
     --escuro: #101016;
     --branco: #ffffff;
-    --gradiente: radial-gradient(circle, #0B1C60, #081447, #050D2D);
+    --gradiente: radial-gradient(circle, rgba(125, 177, 255, 0.9), rgb(0, 64, 153));
     --dark: #0a0a0a;
 }
+
 
 /* Ajuste para seções */
 section {
     padding: 60px 20px;
-    background: var(--escuro);
+    background:var(--branco);
 }
 
 .secao-sobre, .secao-servicos, .secao-contato {
@@ -28,7 +29,7 @@ section {
 }
 
 h2 {
-    color: var(--amarelo);
+    color: var(--gradiente);
     margin-bottom: 20px;
     font-size: 2.5rem;
 }
@@ -51,7 +52,7 @@ body {
     justify-content: space-between;
     padding: 10px 40px;
     width: 100%;
-    background: radial-gradient(circle, #0B1C60, #081447, #050D2D);
+    background: var(--branco);
     transition: all 0.5s;
     position: fixed;
     top: 0;
@@ -61,13 +62,13 @@ body {
 
 
 .navegacao .logo {
-    color: var(--amarelo);
+    color: var(--gradiente);
     font-size: 1.7rem;
     font-weight: 600;
 }
 
 .logo span {
-    color: var(--branco);
+    color: #0e2275;
 }
 
 .navegacao ul {
@@ -78,7 +79,7 @@ body {
 }
 
 .navegacao ul li a {
-    color: var(--branco);
+    color:var(--gradiente);
     font-size: 17px;
     font-weight: 500;
     transition: all 0.5s;
@@ -127,9 +128,10 @@ body {
 }
 
 .modal-content {
-    background: radial-gradient(circle, #0B1C60, #081447, #050D2D);
+    background-image: 
+        radial-gradient(circle, rgba(125, 177, 255, 0.9), rgb(0, 64, 153));
     margin: 15% auto;
-    padding: 20px 50px;
+    padding: 30px 50px;
     border-radius: 10px;
     width: 80%;
     max-width: 600px;
@@ -138,7 +140,7 @@ body {
 }
 
 .botao-modal {
-    background-color: #095e07;
+    background-color: #0eda0a;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -161,7 +163,7 @@ body {
     justify-content: center;
     position: relative;
     background-image: 
-        radial-gradient(circle, rgba(11, 28, 96, 0.9), rgba(1, 2, 8, 1)), 
+    radial-gradient(circle, rgba(125, 177, 255, 0.9), rgb(0, 64, 153)), 
         url('/static/img/backgraud-image-\ cripto.jpg'); 
 
     background-size: cover;
@@ -344,9 +346,9 @@ body {
 
 input {
     font-family: "Poppins", sans-serif;
-  }
+}
   
-  main {
+main {
     width: 100%;
     min-height: 100vh;
     overflow: hidden;
@@ -361,9 +363,9 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
   
-  .box {
+.box {
     position: relative;
     width: 100%;
     max-width: 1020px;
@@ -371,18 +373,18 @@ input {
     background-color: var(--escuro);
     border-radius: 3.3rem;
     box-shadow: 0 60px 40px -30px rgba(0, 0, 0, 0.27);
-  }
+}
   
-  .inner-box {
+.inner-box {
     position: absolute;
     width: calc(100% - 4.1rem);
     height: calc(100% - 4.1rem);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
+}
   
-  .forms-wrap {
+.forms-wrap {
     position: absolute;
     height: 100%;
     width: 45%;
@@ -392,9 +394,9 @@ input {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
     transition: 0.8s ease-in-out;
-  }
+}
   
-  form {
+form {
     max-width: 260px;
     width: 100%;
     margin: 0 auto;
@@ -405,62 +407,64 @@ input {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     transition: opacity 0.02s 0.4s;
-  }
+}
   
-  form.sign-up-form {
+form.sign-up-form {
     opacity: 0;
     pointer-events: none;
-  }
+}
   
-  .logo {
+.logo {
     display: flex;
     align-items: center;
-  }
+}
   
-  .logo img {
+.logo img {
     width: 60px;
     margin-right: 0.3rem;
-  }
+}
   
-  .logo h4 {
+.logo h4 {
     font-size: 1.1rem;
     margin-top: 10px;
     letter-spacing: -0.5px;
     color: #fff;
-  }
+}
   
-  .heading h2 {
+.heading h2 {
     font-size: 2.1rem;
     font-weight: 600;
     color: #fff;
-  }
+}
   
-  .heading h6 {
+.heading h6 {
     color: #fff;
     font-weight: 400;
     font-size: 0.75rem;
     display: inline;
-  }
+}
   
-  .toggle {
+ 
+
+.toggle {
     color: #fff;
     text-decoration: none;
     font-size: 0.75rem;
     font-weight: 500;
     transition: 0.3s;
-  }
+}
   
-  .toggle:hover {
+.toggle:hover {
     color: var(--amarelo);
-  }
+}
   
-  .input-wrap {
+.input-wrap {
     position: relative;
     height: 37px;
     margin-bottom: 2rem;
-  }
+}
   
-  .input-field {
+.input-field {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -472,9 +476,9 @@ input {
     font-size: 0.95rem;
     color: #fff;
     transition: 0.4s;
-  }
+}
   
-  label {
+label {
     position: absolute;
     left: 0;
     top: 50%;
@@ -483,18 +487,18 @@ input {
     color: #bbb;
     pointer-events: none;
     transition: 0.4s;
-  }
+}
   
   .input-field.active {
     border-bottom-color: #151111;
-  }
+}
   
   .input-field.active + label {
     font-size: 0.75rem;
     top: -2px;
-  }
+}
   
-  .sign-btn {
+.sign-btn {
     display: inline-block;
     width: 100%;
     height: 43px;
@@ -506,45 +510,45 @@ input {
     font-size: 0.8rem;
     margin-bottom: 2rem;
     transition: 0.3s;
-  }
+}
   
-  .sign-btn:hover {
+.sign-btn:hover {
     background-color: #e9c95f;
   }
   
-  .text {
+.text {
     color: #bbb;
     font-size: 0.7rem;
-  }
+}
   
-  .text a {
+.text a {
     color: #bbb;
     transition: 0.3s;
-  }
+}
   
-  .text a:hover {
+.text a:hover {
     color: var(--amarelo);
-  }
+}
   
-  main.sign-up-mode form.sign-in-form {
+main.sign-up-mode form.sign-in-form {
     opacity: 0;
     pointer-events: none;
-  }
+}
   
-  main.sign-up-mode form.sign-up-form {
+main.sign-up-mode form.sign-up-form {
     opacity: 1;
     pointer-events: all;
-  }
+}
   
-  main.sign-up-mode .forms-wrap {
+main.sign-up-mode .forms-wrap {
     left: 55%;
-  }
+}
   
-  main.sign-up-mode .carousel {
+main.sign-up-mode .carousel {
     left: 0%;
-  }
+}
   
-  .carousel {
+.carousel {
     position: absolute;
     height: 100%;
     width: 55%;
@@ -557,74 +561,74 @@ input {
     padding-bottom: 2rem;
     overflow: hidden;
     transition: 0.8s ease-in-out;
-  }
+}
   
-  .images-wrapper {
+.images-wrapper {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
-  }
+}
   
-  .image {
+.image {
     width: 100%;
     grid-column: 1/2;
     grid-row: 1/2;
     opacity: 0;
     transition: opacity 0.3s, transform 0.5s;
-  }
+}
   
-  .img-1 {
+.img-1 {
     transform: translate(0, -50px);
-  }
+}
   
-  .img-2 {
+.img-2 {
     transform: scale(0.4, 0.5);
-  }
+}
   
-  .img-3 {
+.img-3 {
     transform: scale(0.3) rotate(-20deg);
-  }
+}
   
-  .image.show {
+.image.show {
     opacity: 1;
     transform: none;
-  }
+}
   
-  .text-slider {
+.text-slider {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-  }
+}
   
-  .text-wrap {
+.text-wrap {
     max-height: 2.2rem;
     overflow: hidden;
     margin-bottom: 2.5rem;
-  }
+}
   
-  .text-group {
+.text-group {
     display: flex;
     flex-direction: column;
     text-align: center;
     transform: translateY(0);
     transition: 0.5s;
-  }
+}
   
-  .text-group h2 {
+.text-group h2 {
     color: #151111;
     line-height: 2.2rem;
     font-weight: 600;
     font-size: 1.6rem;
-  }
+}
   
-  .bullets {
+.bullets {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
+}
   
-  .bullets span {
+.bullets span {
     display: block;
     width: 0.5rem;
     height: 0.5rem;
@@ -633,13 +637,13 @@ input {
     border-radius: 50%;
     cursor: pointer;
     transition: 0.3s;
-  }
+}
   
   .bullets span.active {
     width: 1.1rem;
     background-color: #151111;
     border-radius: 1rem;
-  }
+}
 
 /* Animação de entrada para os elementos da seção */
 @keyframes entrar {
@@ -704,7 +708,7 @@ input {
 
 .feature {
     width: 30%;
-    background: var(--escuro);
+    background: #6783f0;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 0.5rem 1rem rgba(200, 200, 200, 0.3);
@@ -726,7 +730,7 @@ input {
     width: 100%;
     padding: 10rem 2%;
     text-align: center;
-    background: radial-gradient(circle, #0B1C60, #081447, #050D2D);
+    background: radial-gradient(circle, rgba(125, 177, 255, 0.9), rgb(0, 64, 153));
 }
 
 .logo-cripto {
@@ -766,7 +770,7 @@ input {
     text-decoration: none;
     border-radius: 8px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    background: radial-gradient(circle, rgba(11, 28, 96, 0.9), rgba(1, 2, 8, 1));
+    background: radial-gradient(circle, rgba(125, 177, 255, 0.9), rgb(0, 64, 153));
     
 }
 
@@ -776,14 +780,17 @@ input {
 }
 
 .verde {
-    color: green;
+    color:#0eda0a;
 }
 
 .vermelho {
     color: red;
 }
 
+/* Estilos para a Seção de Feedbacks */
 .Feedbacks {
+    background:radial-gradient(circle, rgba(56, 136, 255, 0.9), rgb(0, 64, 153));
+    
     width: 100%;
     padding: 10rem 2%;
     text-align: center;
@@ -795,6 +802,7 @@ input {
     color: var(--amarelo);
 }
 
+/* Estilo para o Formulário de Feedback */
 .feedback-form {
     margin-bottom: 4rem;
     display: flex;
@@ -822,9 +830,8 @@ input {
     cursor: pointer;
 }
 
-.feedback h3{
-    text-decoration: #ffffff;
-}
+
+/* Estilo dos Feedbacks em Cartões */
 .container-Feedbacks {
     display: flex;
     justify-content: space-around;
@@ -832,12 +839,13 @@ input {
     flex-wrap: wrap;
 }
 
-.Feedback {
+.Feedback { /* Certifique-se de que os feedbacks usam exatamente esta classe */
     width: 30%;
-    background: radial-gradient(circle, #0B1C60, #081447, #050D2D);
+    background: radial-gradient(circle, rgba(125, 177, 255, 0.9), rgb(0, 64, 153)); /* Gradiente de fundo */
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+    color: var(--branco); /* Texto em branco para contraste */
 }
 
 .Feedback p {
@@ -846,65 +854,121 @@ input {
 }
 
 
-.contato {
-    width: 100%;
-    padding: 10rem 2%;
-    text-align: center;
+/* Estilo de Paginação Simplificado */
+.paginacao {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
 }
 
-.contato .titulo-principal {
-    font-size: 3rem;
-    margin-bottom: 5rem;
+.paginacao span {
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #0B1C60;
+}
+
+.paginacao .ativo {
+    font-weight: bold;
     color: var(--amarelo);
 }
 
-.formulario-contato {
-    max-width: 600px;
-    margin: 0 auto;
-    background: var(--escuro);
-    padding: 2rem;
-    border-radius: 10px;
+
+
+footer {
+    background: var(--branco);
+    color: var(--escuro); /* Texto branco */
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+    padding: 40px 0;
 }
 
-.formulario-contato input,
-.formulario-contato textarea {
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Centraliza verticalmente */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-column-left, .footer-column-right {
+    flex: 1;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza verticalmente o conteúdo */
+    align-items: center; /* Centraliza horizontalmente o conteúdo */
+}
+
+.footer-column-left h3, .footer-column-right h3 {
+    font-size: 24px;
+    color: var(--amarelo); /* Cor de destaque */
+    text-align: center; /* Centraliza o título */
+}
+
+/* Estilo para a coluna "Fale Conosco" */
+#contact-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza os campos do formulário */
+}
+
+#contact-form label {
+    margin: 10px 0 5px;
+}
+
+#contact-form input, 
+#contact-form textarea {
     width: 100%;
-    padding: 1rem;
-    margin: 0.5rem 0;
-    border-radius: 5px;
+    max-width: 400px;
+    padding: 10px;
     border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: #f0f0f0;
+    text-align: center; /* Centraliza o texto dentro dos campos */
 }
 
-.formulario-contato button {
-    padding: 1rem;
-    background: var(--amarelo);
+#contact-form button {
+    background-color: var(--amarelo);
+    color: #0B1C60;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: all 0.5s;
 }
 
-.formulario-contato button:hover {
-    background: #d99e00;
+#contact-form button:hover {
+    background-color: #081447;
+    color: white;
 }
 
-.footer {
-    width: 100%;
-    padding: 2rem 0;
-    text-align: center;
-    background: var(--escuro);
+/* Estilo para a coluna direita com Contato e Copyright */
+.footer-column-right ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center; /* Centraliza a lista de informações de contato */
 }
 
-.footer p {
-    color: var(--branco);
+.footer-column-right ul li {
+    margin: 10px 0;
 }
 
-.footer a {
+.footer-column-right a {
     color: var(--amarelo);
     text-decoration: none;
 }
 
-.footer a:hover {
-    color: #d99e00;
+.footer-column-right a:hover {
+    text-decoration: underline;
 }
+
+.footer-column-right p {
+    margin-top: 20px;
+    color: var(--escuro); /* Cor para o texto de copyright */
+    text-align: center; /* Centraliza o texto de copyright */
+}
+
+
+

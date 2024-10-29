@@ -37,66 +37,89 @@
       <div class="box">
         <div class="inner-box">
           <div class="forms-wrap">
-            <form action="login.html" autocomplete="off" class="sign-in-form">
+            <form action="{{ url_for('login') }}" method="POST" autocomplete="off" class="sign-in-form">
               <div class="logo">
-                <img src="../static/img/logoAPMC.png" alt="Imagem Início">
-                <h4>APMC</h4>
+                  <img src="../static/img/logoAPMC.png" alt="Imagem Início">
+                  <h4>APMC</h4>
               </div>
-
+          
               <div class="heading">
-                <h2>Bem-Vindo de volta</h2>
-                <h6>Ainda não possui uma conta?</h6>
-                <a href="#" class="toggle">Criar conta</a>
+                  <h2>Bem-Vindo de volta</h2>
+                  <h6>Ainda não possui uma conta?</h6>
+                  <a href="#" class="toggle">Criar conta</a>
               </div>
 
+              {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                  <ul>
+                  {% for category, message in messages %}
+                      <li class="{{ category }}">{{ message }}</li>
+                  {% endfor %}
+                  </ul>
+              {% endif %}
+            {% endwith %}
+            
               <div class="actual-form">
-                <div class="input-wrap">
-                  <input
-                    type="text"
-                    minlength="4"
-                    class="input-field"
-                    autocomplete="off"
-                    required
-                  />
-                  <label>Nome</label>
-                </div>
-
-                <div class="input-wrap">
-                  <input
-                    type="password"
-                    minlength="4"
-                    class="input-field"
-                    autocomplete="off"
-                    required
-                  />
-                  <label>Senha</label>
-                </div>
-
-                <input type="submit" value="Entrar" class="sign-btn" />
-
-                <p class="text">
-                  Esqueceu sua senha?
-                  <a href="#">ajuda</a> para entrar
-                </p>
+                  <div class="input-wrap">
+                      <input
+                          type="email"
+                          name="email"  
+                          minlength="4"
+                          class="input-field"
+                          autocomplete="off"
+                          required
+                      />
+                      <label>Email</label>  <!-- Mudei de "Nome" para "Email" -->
+                  </div>
+          
+                  <div class="input-wrap">
+                      <input
+                          type="password"
+                          name="senha"  
+                          minlength="4"
+                          class="input-field"
+                          autocomplete="off"
+                          required
+                      />
+                      <label>Senha</label>
+                  </div>
+          
+                  <input type="submit" value="Entrar" class="sign-btn" />
+          
+                  <p class="text">
+                      Esqueceu sua senha?
+                      <a href="#">ajuda</a> para entrar
+                  </p>
               </div>
-            </form>
+          </form>
 
-            <form action="index.html" autocomplete="off" class="sign-up-form">
+            <form action="{{ url_for('cadastro') }}" method="POST" autocomplete="off" class="sign-up-form">
               <div class="logo">
-                <img src="../static/img/logoAPMC.png" alt="Imagem Início">
+                <img src="{{ url_for('static', filename='img/logoAPMC.png') }}" alt="Imagem Início">
                 <h4>APMC</h4>
               </div>
-
+            
               <div class="heading">
                 <h2>Comece já</h2>
                 <h6>Já possui uma conta?</h6>
                 <a href="#" class="toggle">Entrar</a>
               </div>
 
+              {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <ul>
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
+              {% endwith %}
+            
               <div class="actual-form">
                 <div class="input-wrap">
                   <input
                     type="text"
+                    name="nome"  
                     minlength="4"
                     class="input-field"
                     autocomplete="off"
@@ -104,20 +127,22 @@
                   />
                   <label>Nome</label>
                 </div>
-
+            
                 <div class="input-wrap">
                   <input
                     type="email"
+                    name="email"  
                     class="input-field"
                     autocomplete="off"
                     required
                   />
                   <label>Email</label>
                 </div>
-
+            
                 <div class="input-wrap">
                   <input
                     type="password"
+                    name="senha"  
                     minlength="4"
                     class="input-field"
                     autocomplete="off"
@@ -125,9 +150,9 @@
                   />
                   <label>Senha</label>
                 </div>
-
+            
                 <input type="submit" value="Criar conta" class="sign-btn" />
-
+            
                 <p class="text">
                   Se registrando, Eu concordo com os
                   <a href="#">Termos de serviço</a> e a 
@@ -135,6 +160,7 @@
                 </p>
               </div>
             </form>
+            
           </div>
 
           <div class="carousel">

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylecripto.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/fav.png') }}" />
+    <title>{{ cripto }}</title>
+    <!-- Adicione seus estilos e scripts aqui -->
+</head>
+<body>
+    <nav class="navegacao">
+        <div class="logo">
+            <span><img src="../static/img/logo.png" alt="Imagem Início" width="60px">APMC</span>
+        </div>
+        <ul class="menu-principal">
+            <li><a href="index">Início</a></li>
+            <li><a href="index">Sobre</a></li>
+            <li><a href="index">Criptomoedas</a></li>
+            <li><a href="index">Feedbacks</a></li>
+            <li><a href="index">Contato</a></li> 
+            
+              
+        </ul>
+        <div class="menu" id="menu-toggle">
+            <div class="barra"></div>
+            <div class="barra"></div>
+            <div class="barra"></div>
+        </div>
+    </nav>
+
+    <section id="monitoramento" class="monitoramento">
+        <div class="container-monitoramento">
+            <div class="titulo-cripto">
+                <img src="{{ logos_criptomoedas[cripto] }}" alt="Logo {{ cripto }}" style="width: 50px; height: 50px; margin-left: 8px;">
+                <span class="nome-cripto">Valor do {{ cripto }}</span>
+                <img src="{{ logos_criptomoedas[cripto] }}" alt="Logo {{ cripto }}" style="width: 50px; height: 50px; margin-left: 8px;">
+            </div>
+            
+            <div class="valor-cripto">
+                <h3 id="preco-{{ cripto }}">
+                    ${{ precos.get(cripto, {}).get('preco', 'Não disponível') | float | round(2) }}
+                </h3>
+                <p id="percentual-{{ cripto }}" class="indice {% if precos.get(cripto, {}).get('percentual_variacao', 0) > 0 %}verde{% else %}vermelho{% endif %}">
+                    {{ precos.get(cripto, {}).get('percentual_variacao', 'Não disponível') | round(2) }}%
+                </p>
+                <p id="volume-{{ cripto }}">
+                    Volume: ${{ precos.get(cripto, {}).get('volume', 'Não disponível') | float | round(2) }}
+                </p>
+            </div>
+    
+            <div class="grafico-normal" style="text-align: center;">
+                {{ precos[cripto]['grafico_normal'] | safe }}
+            </div>
+    
+            <div class="informacoes-adicionais">
+                <h4>Informações de Preços {{ cripto }}</h4>
+                <p>
+                    O preço atual de {{ cripto }} é de ${{ precos.get(cripto, {}).get('preco', 'Não disponível') | float | round(2) }} com uma capitalização de mercado de ${{ precos.get(cripto, {}).get('capitalizacao', 'Não disponível') | float | round(2) }}.
+                </p>
+                <p>
+                    O volume de trading nas últimas 24 horas é de ${{ precos.get(cripto, {}).get('volume', 'Não disponível') | float | round(2) }}.
+                </p>
+                <p>
+                    {{ cripto }} está com uma variação de {{ precos.get(cripto, {}).get('percentual_variacao', 'Não disponível') | float | round(2) }}% nas últimas 24 horas, com um fornecimento em circulação de {{ precos.get(cripto, {}).get('fornecimento', 'Não disponível') }}.
+                </p>
+            </div>
+            
+            <!-- Feedback do Usuário -->
+            <div class="feedback-usuario">
+                <h4>Como você se sente em relação ao {{ cripto }} hoje?</h4>
+                <div class="feedback-opcoes">
+                    <button class="feedback-bom">Bom</button>
+                    <button class="feedback-ruim">Ruim</button>
+                </div>
+                <p>Observação: esta informação é apenas para referência.</p>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        setInterval(function() {
+            fetch('/atualizar_dados/{{ cripto }}')
+                .then(response => response.json())
+                .then(data => {
+                    // Atualizar o preço
+                    document.getElementById('preco-{{ cripto }}').innerText = '$' + parseFloat(data.preco).toFixed(2);
+    
+                    // Atualizar o percentual de variação com sinal
+                    const percentualElem = document.getElementById('percentual-{{ cripto }}');
+                    const sinal = data.percentual_variacao >= 0 ? "+" : "-";
+                    percentualElem.innerText = `${sinal}${Math.abs(data.percentual_variacao).toFixed(2)}%`;
+    
+                    // Atualizar volume de mercado
+                    document.getElementById('volume-{{ cripto }}').innerText = 'Volume: $' + parseFloat(data.volume).toFixed(2);
+    
+                    // Aplicar a classe para a cor correta no percentual
+                    if (data.percentual_variacao >= 0) {
+                        percentualElem.classList.add('verde');
+                        percentualElem.classList.remove('vermelho');
+                    } else {
+                        percentualElem.classList.add('vermelho');
+                        percentualElem.classList.remove('verde');
+                    }
+    
+                    // Atualizar o gráfico com os dados históricos
+                    const trace = {
+                        x: data.historico_datas,  // Array de datas
+                        y: data.historico_precos, // Array de preços
+                        mode: 'lines+markers',
+                        line: { color: data.percentual_variacao >= 0 ? '#0eda0a' : 'red', width: 2 },
+                        marker: { size: 5 }
+                    };
+                    const layout = {
+                        title: `Histórico de Preços de {{ cripto }}`,
+                        xaxis: { title: 'Data' },
+                        yaxis: { title: 'Preço $' },
+                        height: 400,
+                        width: 800,
+                        margin: { l: 40, r: 40, t: 40, b: 40 },
+                        paper_bgcolor: 'rgba(0,0,0,0)',
+                        plot_bgcolor: 'rgba(255,255,255,0)'
+                    };
+    
+                    // Renderizar o gráfico
+                    Plotly.newPlot(`grafico-normal-{{ cripto }}`, [trace], layout);
+                })
+                .catch(error => console.error('Erro ao atualizar dados:', error));
+        }, 10000); // Atualiza a cada 10 segundos
+    </script>
+    
+    <div class="container">
+        <h1>Previsão de Preços para {{ cripto }}</h1>
+
+        <form method="POST" action="{{ url_for('previsao_precos', cripto=cripto) }}">
+            <label for="periodo">Escolha o Período Histórico:</label>
+            <select name="periodo" id="periodo">
+                <option value="1m" {% if periodo_historico == '1m' %}selected{% endif %}>Último Mês</option>
+                <option value="3m" {% if periodo_historico == '3m' %}selected{% endif %}>Últimos 3 Meses</option>
+                <option value="6m" {% if periodo_historico == '6m' %}selected{% endif %}>Últimos 6 Meses</option>
+                <option value="1y" {% if periodo_historico == '1y' %}selected{% endif %}>Último Ano</option>
+                <option value="5y" {% if periodo_historico == '5y' %}selected{% endif %}>Últimos 5 Anos</option>
+            </select>
+
+            <label for="dias">Quantidade de Dias de Previsão (30 a 365):</label>
+            <input type="number" name="dias" id="dias" value="{{ periodos }}" min="30" max="365">
+
+            <button type="submit">Iniciar Previsão</button>
+        </form>
+
+        {% if grafico %}
+        <h2>Gráfico de Previsão</h2>
+        <div class="graph">
+            {{ grafico | safe }}
+        </div>
+        {% endif %}
+
+        {% if previsao is not none %}
+        <div>
+            <h2>Previsão de Preços</h2>
+            <table class="table table-bordered table-hover table-striped text-center">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Data</th>
+                        <th>Previsão</th>
+                        <th>Limite Inferior</th>
+                        <th>Limite Superior</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, row in previsao.iterrows() %}
+                    <tr>
+                        <td>{{ index.strftime('%Y-%m-%d') }}</td>
+                        <td>{{ row.yhat | round(2) }}</td>
+                        <td>{{ row.yhat_lower | round(2) }}</td>
+                        <td>{{ row.yhat_upper | round(2) }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            
+            
+        </div>
+        {% endif %}
+
+
+        <div>
+            <h2>Feedback</h2>
+            <p>Se tiver algum comentário, sinta-se à vontade para entrar em contato!</p>
+        </div>
+    </div>
+    
+    <footer>
+        <div id="contato"class="footer-container">
+
+            <div class="footer-column-right">
+                <h3>Contato</h3>
+                <ul>
+                    <li>Email: <a href="mailto:Site.APMC@gmail.com">Site.APMC@gmail.com</a></li>
+                
+                </ul>
+                <p>&copy; 2024 APMC - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
+
