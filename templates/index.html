@@ -12,7 +12,12 @@
     <!-- Navegação -->
     <nav class="navegacao">
         <div class="logo">
-            <span><img src="../static/img/logo.png" alt="Imagem Início" width="40px">APMC</span>
+            <a href="{{ url_for('index') }}" style="text-decoration: none; color: inherit;">
+                <span>
+                    <img src="../static/img/logo.png" alt="Imagem Início" width="60px"> APMC
+                </span>
+            </a>
+            
         </div>
         <ul class="menu-principal">
             <li><a href="#">Início</a></li>
@@ -45,7 +50,7 @@
         <div class="texto-inicio">
             <h4 class="texto-h4">Bem-vindo ao</h4>
             <h1 class="texto-h1">APMC</h1>
-            <p>Seu aplicativo de previsão e monitoramento de criptomoedas.</p>
+            <p>Seu site de previsão e monitoramento de criptomoedas.</p>
             <a href="#Criptomoedas" class="botao-inicio">Comece já</a>
         </div>
         <div class="imagem-inicio">

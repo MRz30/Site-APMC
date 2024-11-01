@@ -211,10 +211,14 @@ def previsao_precos(cripto):
             # Criar gráfico de previsão com plotly
             fig = go.Figure()
 
+            # Filtrar a previsão para incluir apenas os dias futuros
+            data_historica_ultima = df['ds'].max()  # Última data do histórico
+            previsao_futura = previsao[previsao['ds'] > data_historica_ultima]  # Filtra para dias futuros
+
             # Linha de Previsão
             fig.add_trace(go.Scatter(
-                x=previsao['ds'],
-                y=previsao['yhat'],
+                x=previsao_futura['ds'],
+                y=previsao_futura['yhat'],
                 mode='lines+markers',
                 name='Previsão',
                 line=dict(color='royalblue', width=2, dash='solid'),  # Cor e estilo da linha
@@ -254,6 +258,7 @@ def previsao_precos(cripto):
             )
 
             grafico = fig.to_html(full_html=False)
+
 
             # Filtro de histórico
             precos_historicos = df[df['ds'] >= (datetime.now() - pd.DateOffset(years=int(periodo_historico[:-1])))]

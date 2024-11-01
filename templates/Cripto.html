@@ -9,9 +9,15 @@
     <!-- Adicione seus estilos e scripts aqui -->
 </head>
 <body>
+
     <nav class="navegacao">
         <div class="logo">
-            <span><img src="../static/img/logo.png" alt="Imagem Início" width="60px">APMC</span>
+            <a href="{{ url_for('index') }}" style="text-decoration: none; color: inherit;">
+                <span>
+                    <img src="../static/img/logo.png" alt="Imagem Início" width="60px"> APMC
+                </span>
+            </a>
+            
         </div>
         <ul class="menu-principal">
             <li><a href="index">Início</a></li>
@@ -70,11 +76,24 @@
             <div class="feedback-usuario">
                 <h4>Como você se sente em relação ao {{ cripto }} hoje?</h4>
                 <div class="feedback-opcoes">
-                    <button class="feedback-bom">Bom</button>
-                    <button class="feedback-ruim">Ruim</button>
+                    <span class="feedback-bom" onclick="darFeedback('bom')" aria-label="Bom Feedback" role="button">
+                        👍 <!-- Joinha -->
+                    </span>
+                    <span class="feedback-ruim" onclick="darFeedback('ruim')" aria-label="Ruim Feedback" role="button">
+                        👎 <!-- Joinha de cabeça para baixo -->
+                    </span>
                 </div>
-                <p>Observação: esta informação é apenas para referência.</p>
+                <div class="barra-feedback">
+                    <div id="barra-bom" class="barra feedback-bom-barra" style="width: 0%;"></div>
+                    <div id="barra-ruim" class="barra feedback-ruim-barra" style="width: 0%;"></div>
+                </div>
+                <div class="contagem-votos">
+                    <span id="contagem-bom">0 votos Bom</span>
+                    <span id="contagem-ruim">0 votos Ruim</span>
+                </div>
+                <p class="observacao">Observação: esta informação é apenas para referência.</p>
             </div>
+        
         </div>
     </section>
     
@@ -132,21 +151,148 @@
     <div class="container">
         <h1>Previsão de Preços para {{ cripto }}</h1>
 
-        <form method="POST" action="{{ url_for('previsao_precos', cripto=cripto) }}">
-            <label for="periodo">Escolha o Período Histórico:</label>
-            <select name="periodo" id="periodo">
-                <option value="1m" {% if periodo_historico == '1m' %}selected{% endif %}>Último Mês</option>
-                <option value="3m" {% if periodo_historico == '3m' %}selected{% endif %}>Últimos 3 Meses</option>
-                <option value="6m" {% if periodo_historico == '6m' %}selected{% endif %}>Últimos 6 Meses</option>
-                <option value="1y" {% if periodo_historico == '1y' %}selected{% endif %}>Último Ano</option>
-                <option value="5y" {% if periodo_historico == '5y' %}selected{% endif %}>Últimos 5 Anos</option>
-            </select>
+        <!-- Modal -->
+            
+        <div id="modal" class="modal">
+            <div class="modal-conteudo">
+                <span class="fechar" onclick="fecharModal()">&times;</span>
+                <h2>Aviso</h2>
+                <p>Dependendo do período histórico escolhido, a previsão pode variar. É recomendado que você escolha o máximo possível de dados para uma previsão mais precisa.</p>
+                <label>
+                    <input type="checkbox" id="naoMostrarMais"> Não mostrar novamente
+                </label>
+                <button id="continuar">Continuar</button>
+            </div>
+        </div>
 
-            <label for="dias">Quantidade de Dias de Previsão (30 a 365):</label>
-            <input type="number" name="dias" id="dias" value="{{ periodos }}" min="30" max="365">
+        <script>
+            // Exibir o modal ao carregar a página
+            window.onload = function() {
+                // Verifica se o usuário escolheu não mostrar mais
+                if (!localStorage.getItem('naoMostrarMais')) {
+                    document.getElementById('modal').style.display = 'block';
+                }
+            };
+        
+            // Fechar o modal
+            function fecharModal() {
+                document.getElementById('modal').style.display = 'none';
+            }
+        
+            // Continuar com a previsão
+            document.getElementById('continuar').onclick = function() {
+                // Armazenar a escolha do usuário
+                if (document.getElementById('naoMostrarMais').checked) {
+                    localStorage.setItem('naoMostrarMais', 'true');
+                }
+                fecharModal(); // Fecha o modal
+                document.querySelector('.formulario').submit(); // Envia o formulário
+            };
+        </script>
+        
+        <div id="modalExplicacao" class="modal-expl"> 
+            <div class="modal-expl-conteudo">
+                <span class="fechar-expl" onclick="fecharModal()">×</span>
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo APMC" class="logo-modal" width="40px">
+                
+                <div id="pagina1" class="pagina active">
+                    <h2>Como Funciona a Previsão</h2>
+                    <p>A previsão utiliza dados históricos de preços de criptomoedas e aplica um modelo estatístico para identificar padrões e tendências. Essa análise baseia-se em informações passadas, mas deve-se lembrar que o mercado é influenciado por fatores como eventos econômicos e decisões políticas, o que pode afetar a precisão das previsões.</p>
+                    <button class="navegar" onclick="irParaPagina('pagina2')">Próximo</button>
+                </div>
+                
+                <div id="pagina2" class="pagina" style="display:none;">
+                    <h2>Valores Estimados</h2>
+                    <p>A previsão inclui valores mínimos e máximos, refletindo a volatilidade do mercado. Esses intervalos são importantes para entender os riscos e oportunidades potenciais de investimento, servindo como uma ferramenta útil para decisões informadas.</p>
+                    <button class="navegar" onclick="irParaPagina('pagina1')">Anterior</button>
+                    <button class="navegar" onclick="irParaPagina('pagina3')">Próximo</button>
+                </div>
+                
+                <div id="pagina3" class="pagina" style="display:none;">
+                    <h2>Atenção</h2>
+                    <p>Lembre-se de que o mercado de criptomoedas é dinâmico e sujeito a rápidas mudanças. As previsões são baseadas em dados atuais e não garantem resultados futuros. Utilize essas informações como referência e considere realizar análises adicionais antes de investir.</p>
+                    <p>Seja cauteloso e consulte especialistas ou fontes confiáveis antes de tomar decisões.</p>
+        
+                    <!-- Opção de não mostrar novamente -->
+                    <div id="opcaoNaoMostrar" style="margin-top: 20px;">
+                        <label>
+                            <input type="checkbox" id="naoMostrar" onclick="naoMostrarNovamente()">
+                            Não mostrar novamente
+                        </label>
+                    </div>
+                    
+                    <button class="navegar" onclick="irParaPagina('pagina2')">Anterior</button>
+                    <button class="navegar" onclick="fecharModal()">Fechar</button>
+                </div>
+            </div>
+        </div>
+        
+        <script>
+            // Função para mostrar o modal
+            function mostrarModal() {
+                // Verifica se a opção "não mostrar novamente" foi marcada
+                if (localStorage.getItem('naoMostrar') !== 'true') {
+                    document.getElementById('modalExplicacao').style.display = 'block';
+                    irParaPagina('pagina1'); // Inicia na página 1
+                }
+            }
+        
+            // Função para fechar o modal
+            function fecharModal() {
+                document.getElementById('modalExplicacao').style.display = 'none';
+            }
+        
+            // Função para ir para a página especificada
+            function irParaPagina(paginaId) {
+                // Ocultar todas as páginas
+                const paginas = document.querySelectorAll('.pagina');
+                paginas.forEach(pagina => {
+                    pagina.style.display = 'none';
+                });
+        
+                // Mostrar a página atual
+                document.getElementById(paginaId).style.display = 'block';
+            }
+        
+            // Função para armazenar a opção "Não mostrar novamente"
+            function naoMostrarNovamente() {
+                const checkBox = document.getElementById('naoMostrar');
+                localStorage.setItem('naoMostrar', checkBox.checked);
+            }
+        
+            // Mostrar o modal após 30 segundos
+            setTimeout(mostrarModal, 1000); // 30 segundos
+        </script>
+        
+        
+        
 
+        
+        
+        <form method="POST" action="{{ url_for('previsao_precos', cripto=cripto) }}" class="formulario">
+            <div class="campo">
+                <label for="periodo">Escolha o Período Histórico:</label>
+                <select name="periodo" id="periodo">
+                    <option value="1m" {% if periodo_historico == '1m' %}selected{% endif %}>Último Mês</option>
+                    <option value="3m" {% if periodo_historico == '3m' %}selected{% endif %}>Últimos 3 Meses</option>
+                    <option value="6m" {% if periodo_historico == '6m' %}selected{% endif %}>Últimos 6 Meses</option>
+                    <option value="1y" {% if periodo_historico == '1y' %}selected{% endif %}>Último Ano</option>
+                    <option value="5y" {% if periodo_historico == '5y' %}selected{% endif %}>Últimos 5 Anos</option>
+                </select>
+            </div>
+        
+            <div class="campo">
+                <label for="dias">Quantidade de Dias de Previsão (30 a 365):</label>
+                <input type="number" name="dias" id="dias" value="{{ periodos }}" min="30" max="365" required> <!-- Campo obrigatório -->
+            </div>
+        
             <button type="submit">Iniciar Previsão</button>
         </form>
+        
+        
+        
+        
+        
 
         {% if grafico %}
         <h2>Gráfico de Previsão</h2>

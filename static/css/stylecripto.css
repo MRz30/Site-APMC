@@ -161,11 +161,11 @@ p {
     display: flex; 
     justify-content: center;
     align-items: center;
-    margin: 20px 0; 
+    margin: 20px -10; 
     padding: 20px; 
     border: 2px solid rgba(255, 255, 255, 0.3); 
     border-radius: 10px; 
-    background: rgba(255, 255, 255, 0.05); 
+    background: rgba(255, 255, 255, 0.155); 
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     width: 100%; 
     max-width: 800px; 
@@ -207,40 +207,86 @@ p {
 
 
 .feedback-usuario {
-    margin: 40px 0; 
-    padding: 20px; 
-    background: rgba(0, 0, 0, 0.1); 
-    border-radius: 10px; 
+    font-family: Arial, sans-serif; /* Fonte limpa */
+    background-color: #ffffff; /* Fundo branco */
+    border-radius: 8px; /* Bordas arredondadas */
+    padding: 20px; /* Espaçamento interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    max-width: 800px; /* Aumentando a largura máxima */
+    margin: 20px auto; /* Centraliza */
+    text-align: center; /* Centraliza o texto */
 }
 
-
-.feedback-opcoes button {
-    padding: 10px 20px; 
-    margin: 10px; 
-    border: none; 
-    border-radius: 5px; 
-    background: var(--gradiente);
-    color: var(--branco);
-    cursor: pointer; 
-    transition: background 0.3s, transform 0.2s, box-shadow 0.2s; 
+.feedback-usuario h4 {
+    margin-bottom: 10px; /* Espaço abaixo do título */
+    color: #333; /* Cor do texto */
+    font-size: 18px; /* Tamanho da fonte */
 }
 
-.feedback-opcoes button:hover {
-    background: var(--amarelo); 
-    transform: translateY(-2px); 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+.feedback-opcoes {
+    display: flex; /* Flexbox para alinhar os ícones */
+    justify-content: space-around; /* Espaço igual entre os ícones */
+    margin-bottom: 15px; /* Margem inferior para espaçamento */
 }
 
-.feedback-opcoes button:focus {
-    outline: none; 
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); 
+.feedback-bom, .feedback-ruim {
+    font-size: 40px; /* Tamanho do emoji */
+    cursor: pointer; /* Cursor de mão */
+    transition: transform 0.2s; /* Efeito de transição */
 }
+
+.feedback-bom:hover, .feedback-ruim:hover {
+    transform: scale(1.3); /* Efeito de aumento ao passar o mouse */
+}
+
+.barra-feedback {
+    width: 100%; /* Largura total */
+    height: 10px; /* Aumentando a altura da barra */
+    background-color: #e0e0e0; /* Fundo da barra */
+    border-radius: 10px; /* Bordas arredondadas */
+    margin: 10px 0; /* Margem superior e inferior */
+    position: relative; /* Para posicionar os elementos absolutos */
+    overflow: hidden; /* Oculta o excesso da barra vermelha */
+}
+
+.barra {
+    height: 100%; /* Altura total */
+    border-radius: 10px; /* Bordas arredondadas */
+    transition: width 0.3s; /* Efeito de transição na largura */
+    position: absolute; /* Para poder posicionar dentro da barra */
+    bottom: 0; /* Posicionar na parte inferior */
+}
+
+.feedback-bom-barra {
+    background-color: #4caf50; /* Verde para feedback bom */
+    left: 0; /* Posicionar à esquerda */
+}
+
+.feedback-ruim-barra {
+    background-color: #f44336; /* Vermelho para feedback ruim */
+    right: 0; /* Posicionar à direita */
+}
+
+.contagem-votos {
+    display: flex; /* Flexbox para alinhar os contadores */
+    justify-content: space-between; /* Espaço entre os contadores */
+    margin-top: 5px; /* Margem superior */
+    font-size: 14px; /* Tamanho da fonte */
+    color: #666; /* Cor do texto */
+}
+
+.observacao {
+    font-size: 12px; /* Tamanho da fonte */
+    color: #999; /* Cor mais clara */
+    margin-top: 10px; /* Margem acima da observação */
+}
+
 
 
 .container {
     max-width: 800px; 
     margin: 0 auto; 
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 50px;
     padding: 100px;
     background-color: var(--gradiente); 
@@ -259,7 +305,7 @@ p {
 }
 
 h1, h2 {
-    margin-top: 110px;
+    margin-top: 20px;
     color: #333; 
     text-align: center; 
 }
@@ -269,12 +315,274 @@ p{
     text-align: center;
 }
 
-form {
-    margin-bottom: 20px; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 10px; 
+.modal-expl {
+    display: none; /* Escondido por padrão */
+    position: fixed; /* Fixo no lugar */
+    z-index: 1000; /* Em cima de outros conteúdos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    overflow: auto; /* Ativar rolagem se necessário */
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro com opacidade */
 }
+
+.modal-expl-conteudo {
+    background-color: #fff; /* Fundo branco */
+    margin: 15% auto; /* 15% da parte superior e centralizado */
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px; /* Bordas arredondadas */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Sombra */
+    width: 90%; /* Largura do modal */
+    max-width: 500px; /* Largura máxima */
+    animation: fadeIn 0.5s; /* Animação de entrada */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fechar-expl {
+    color: #aaa; /* Cor do botão de fechar */
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.fechar-expl:hover,
+.fechar-expl:focus {
+    color: #000; /* Muda a cor ao passar o mouse */
+    text-decoration: none;
+}
+
+.logo-modal {
+    display: block;
+    padding-left: 13px;
+    margin: 0 auto 20px; /* Centraliza o logo e adiciona espaço abaixo */
+    width: 20%; /* Ajuste o tamanho conforme necessário */
+}
+
+.pagina {
+    display: none; /* Esconder todas as páginas inicialmente */
+    text-align: justify; /* Justifica o texto */
+}
+
+.pagina.active {
+    display: block; /* Mostrar apenas a página ativa */
+}
+
+.navegar {
+    background-color: royalblue; /* Cor do botão */
+    color: white; /* Cor do texto */
+    border: none; /* Sem borda */
+    padding: 10px 20px; /* Espaçamento */
+    border-radius: 5px; /* Bordas arredondadas */
+    cursor: pointer; /* Mão ao passar o mouse */
+    margin: 10px 5px; /* Margens */
+}
+
+.navegar:hover {
+    background-color: darkblue; /* Cor ao passar o mouse */
+}
+
+
+
+.formulario {
+    display: flex; /* Layout flexível */
+    align-items: center; /* Alinha itens verticalmente */
+    justify-content: space-between; /* Espaça itens igualmente */
+    padding: 20px; /* Padding interno */
+    background: linear-gradient(135deg, #ffffff, #f8f9fa); /* Gradiente sutil */
+    border-radius: 12px; /* Bordas arredondadas */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada */
+    margin: 40px auto; /* Margens superior e inferior */
+    max-width: 900px; /* Largura máxima */
+    transition: transform 0.3s, box-shadow 0.3s; /* Transições suaves */
+}
+
+.formulario:hover {
+    transform: translateY(-2px); /* Levanta levemente ao passar o mouse */
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2); /* Aumenta a sombra ao passar o mouse */
+}
+
+.campo {
+    display: flex; /* Flexível para alinhamento */
+    flex-direction: column; /* Organiza os itens verticalmente */
+    margin-right: 20px; /* Espaçamento entre campos */
+    flex: 1; /* Permite que cada campo ocupe espaço igual */
+}
+
+.campo:last-child {
+    margin-right: 0; /* Remove margem direita do último campo */
+}
+
+label {
+    font-size: 0.9em; /* Tamanho da fonte */
+    color: #333; /* Cor do texto */
+    margin-bottom: 5px; /* Espaçamento entre o rótulo e o campo */
+}
+
+select, input[type="number"] {
+    padding: 12px; /* Aumenta o padding */
+    border: 2px solid #007bff; /* Borda colorida */
+    border-radius: 6px; /* Bordas arredondadas */
+    font-size: 1em; /* Tamanho da fonte */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transições suaves */
+    background-color: #f8f9fa; /* Fundo claro */
+}
+
+/* Mantendo o restante do CSS */
+
+select {
+    padding: 12px; /* Aumenta o padding */
+    border: 2px solid #007bff; /* Borda colorida */
+    border-radius: 6px; /* Bordas arredondadas */
+    font-size: 1em; /* Tamanho da fonte */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transições suaves */
+    background-color: #f8f9fa; /* Fundo claro */
+    appearance: none; /* Remove estilo padrão do select */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23007bff" width="20" height="20"><path d="M7 10l5 5 5-5H7z"/></svg>'); /* Ícone estilizado de seta para baixo */
+    background-repeat: no-repeat; /* Não repetir a imagem */
+    background-position: right 10px center; /* Posiciona a seta */
+    background-size: 20px; /* Tamanho da seta */
+}
+
+/* Para o input de número, adicionando setas com CSS */
+input[type="number"] {
+    padding: 12px; /* Aumenta o padding */
+    border: 2px solid #007bff; /* Borda colorida */
+    border-radius: 6px; /* Bordas arredondadas */
+    font-size: 1em; /* Tamanho da fonte */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transições suaves */
+    background-color: #f8f9fa; /* Fundo claro */
+    /* Removemos a imagem de fundo */
+}
+
+/* Adicionando estilo para o container do input number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Remove estilo padrão do botão de rotação */
+}
+
+/* Adicionando setas personalizadas */
+input[type="number"] {
+    position: relative;
+    padding-right: 30px; /* Espaço para as setas */
+}
+
+input[type="number"]::after {
+    content: '';
+    position: absolute;
+    right: 10px; /* Espaço para a seta da direita */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px; /* Largura da seta */
+    height: 12px; /* Altura da seta */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23007bff"><path d="M12 15l-5-5h10z"/></svg>'); /* Seta para cima */
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+input[type="number"]::before {
+    content: '';
+    position: absolute;
+    right: 10px; /* Espaço para a seta da esquerda */
+    top: calc(50% - 12px); /* Posição da seta acima */
+    transform: translateY(-100%);
+    width: 12px; /* Largura da seta */
+    height: 12px; /* Altura da seta */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23007bff"><path d="M12 9l5 5H7z"/></svg>'); /* Seta para baixo */
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+/* Melhora o foco */
+select:focus, input[type="number"]:focus {
+    border-color: #0056b3; /* Cor ao focar */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Sombra ao focar */
+}
+
+/* Estilizando o botão para alinhamento */
+button {
+    background-color: #28a745; /* Verde para o botão */
+    color: white; /* Cor do texto do botão */
+    margin-top: 27px;
+    padding: 12px 20px; /* Aumenta o padding */
+    border: none; /* Sem borda */
+    border-radius: 6px; /* Bordas arredondadas */
+    cursor: pointer; /* Cursor de ponteiro */
+    font-size: 1em; /* Tamanho da fonte */
+    transition: background-color 0.3s, transform 0.2s; /* Transições suaves */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra do botão */
+    margin-left: 20px; /* Espaçamento à esquerda para alinhamento */
+    align-self: flex-start; /* Alinha o botão ao início da linha */
+}
+
+button:hover {
+    background-color: #218838; /* Verde mais escuro ao passar o mouse */
+    transform: scale(1.05); /* Aumenta levemente o botão */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Aumenta a sombra ao passar o mouse */
+}
+
+.modal {
+    display: none; /* Oculta o modal por padrão */
+    position: fixed; 
+    z-index: 1000; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+}
+
+.modal-conteudo {
+    background-color: #fff; 
+    margin: 15% auto; 
+    padding: 20px; 
+    border: 1px solid #888; 
+    width: 80%; /* Largura do modal */
+    text-align: justify;
+    max-width: 500px; /* Largura máxima */
+    border-radius: 8px; /* Bordas arredondadas */
+    position: relative; /* Necessário para o posicionamento absoluto do botão */
+}
+
+.fechar {
+    color: #aaa; 
+    float: right; 
+    font-size: 28px; 
+    font-weight: bold; 
+}
+
+.fechar:hover,
+.fechar:focus {
+    color: black; 
+    text-decoration: none; 
+    cursor: pointer; 
+}
+
+button#continuar {
+    background-color: #007bff; 
+    color: white; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    position: absolute; /* Posiciona o botão */
+    right: 20px; /* Alinha à direita */
+    bottom: 20px; /* Alinha ao fundo */
+}
+
+button#continuar:hover {
+    background-color: #0056b3; 
+}
+
+
 
 
 input[type="number"],

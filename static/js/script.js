@@ -205,3 +205,25 @@ function iniciarPrevisao() {
     })
     .catch(error => console.error('Erro ao iniciar a previsão:', error));
 }
+
+let contagemBom = 0; // Contagem de votos bons
+let contagemRuim = 0; // Contagem de votos ruins
+
+function darFeedback(tipo) {
+    if (tipo === 'bom') {
+        contagemBom++;
+        const largura = (contagemBom / (contagemBom + contagemRuim)) * 100;
+        document.getElementById('barra-bom').style.width = largura + '%';
+    } else {
+        contagemRuim++;
+        const largura = (contagemRuim / (contagemBom + contagemRuim)) * 100;
+        document.getElementById('barra-ruim').style.width = largura + '%';
+    }
+    
+    // Atualizar contagem
+    document.getElementById('contagem-bom').innerText = `${contagemBom} votos Bom`;
+    document.getElementById('contagem-ruim').innerText = `${contagemRuim} votos Ruim`;
+}
+
+
+    
